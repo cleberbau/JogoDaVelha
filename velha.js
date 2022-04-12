@@ -1,6 +1,7 @@
-let jogador = null;
+let jogador, vencedor = null;
 let jogadorSelecionado = document.getElementById('jogador-selecionado');
-let quadrados = document.getElementsByClassName(quadrado);
+let vencedorSelecionado = document.getElementById('vencedorSelecionado');
+let quadrados = document.getElementsByClassName('quadrado');
 
 function escolherQuadrado(id){
     let quadrado = document.getElementById(id);
@@ -18,6 +19,7 @@ function escolherQuadrado(id){
     }
 
     mudarJogador(jogador);
+    checaVencedor();
 }
 
 function mudarJogador(valor){
@@ -37,4 +39,56 @@ function checaVencedor(){
     let quadrado7 = document.getElementById(7);
     let quadrado8 = document.getElementById(8);
     let quadrado9 = document.getElementById(9);
+
+    if(checaSequencia(quadrado1,quadrado2,quadrado3)){
+        mudaCorQuadrado(quadrado1,quadrado2,quadrado3);
+        mudarVencedor(quadrado1);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado4,quadrado5,quadrado6)){
+        mudaCorQuadrado(quadrado4,quadrado5,quadrado6);
+        mudarVencedor(quadrado4);
+        return;
+
+    }
+    if(checaSequencia(quadrado7,quadrado8,quadrado9)){
+        mudaCorQuadrado(quadrado7,quadrado8,quadrado9);
+        mudarVencedor(quadrado4);
+        return;
+
+    }
+    if(checaSequencia(quadrado1,quadrado4,quadrado7)){
+        mudaCorQuadrado(quadrado1,quadrado4,quadrado7);
+        mudarVencedor(quadrado4);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado1,quadrado4,quadrado7)){
+        mudaCorQuadrado(quadrado1,quadrado4,quadrado7);
+        mudarVencedor(quadrado4);
+
+    }
+}
+function mudarVencedor(quadrado){
+    vencedor = quadrado.innerHTML;
+    vencedorSelecionado.innerHTML = vencedor;
+
+}
+
+function mudaCorQuadrado(quadrado1,quadrado2,quadrado3){
+    quadrado1.style.background = '#06f400';
+    quadrado2.style.background = '#06f400';
+    quadrado3.style.background = '#06f400';
+
+}
+
+function checaSequencia(quadrado1,quadrado2,quadrado3){
+    var eigual = false;
+    if(quadrado1.innerHTML !== '-' && quadrado1.innerHTML === quadrado2.innerHTML && quadrado2.innerHTML === quadrado3.innerHTML){
+        eigual = true;
+    }
+    return eigual;
 }
