@@ -1,9 +1,12 @@
 let jogador, vencedor = null;
 let jogadorSelecionado = document.getElementById('jogador-selecionado');
-let vencedorSelecionado = document.getElementById('vencedorSelecionado');
+let vencedorSelecionado = document.getElementById('vencedor-selecionado');
 let quadrados = document.getElementsByClassName('quadrado');
-
 function escolherQuadrado(id){
+    if (vencedor !== null){
+        return;
+    }
+
     let quadrado = document.getElementById(id);
     if (quadrado.innerHTML !== '-'){
         return;
@@ -26,6 +29,8 @@ function mudarJogador(valor){
     jogador = valor;
     jogadorSelecionado.innerHTML = jogador;
 }
+
+
 
 mudarJogador('X');
 
@@ -55,27 +60,55 @@ function checaVencedor(){
     }
     if(checaSequencia(quadrado7,quadrado8,quadrado9)){
         mudaCorQuadrado(quadrado7,quadrado8,quadrado9);
-        mudarVencedor(quadrado4);
+        mudarVencedor(quadrado7);
         return;
 
     }
     if(checaSequencia(quadrado1,quadrado4,quadrado7)){
         mudaCorQuadrado(quadrado1,quadrado4,quadrado7);
-        mudarVencedor(quadrado4);
+        mudarVencedor(quadrado1);
         return;
 
     }
 
     if(checaSequencia(quadrado1,quadrado4,quadrado7)){
         mudaCorQuadrado(quadrado1,quadrado4,quadrado7);
-        mudarVencedor(quadrado4);
+        mudarVencedor(quadrado1);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado2,quadrado5,quadrado8)){
+        mudaCorQuadrado(quadrado2,quadrado5,quadrado8);
+        mudarVencedor(quadrado2);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado3,quadrado6,quadrado9)){
+        mudaCorQuadrado(quadrado3,quadrado6,quadrado9);
+        mudarVencedor(quadrado3);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado1,quadrado5,quadrado9)){
+        mudaCorQuadrado(quadrado1,quadrado5,quadrado9);
+        mudarVencedor(quadrado1);
+        return;
+
+    }
+
+    if(checaSequencia(quadrado3,quadrado5,quadrado7)){
+        mudaCorQuadrado(quadrado3,quadrado5,quadrado7);
+        mudarVencedor(quadrado5);
 
     }
 }
+
 function mudarVencedor(quadrado){
     vencedor = quadrado.innerHTML;
-    vencedorSelecionado.innerHTML = vencedor;
-
+    vencedorSelecionado.innerHTML = 'O Vencedor é '+ vencedor;
 }
 
 function mudaCorQuadrado(quadrado1,quadrado2,quadrado3){
@@ -91,4 +124,17 @@ function checaSequencia(quadrado1,quadrado2,quadrado3){
         eigual = true;
     }
     return eigual;
+}
+
+function reiniciar(){
+    vencedor = null;
+    vencedorSelecionado.innerHTML = '';
+
+    for(let i=1; i <=9; i++){
+        let quadrado = document.getElementById(i);
+        quadrado.style.background = '#eee';
+        quadrado.style.color = '#eee';
+        quadrado.innerHTML = '-';
+    }
+    mudarJogador('X');
 }
